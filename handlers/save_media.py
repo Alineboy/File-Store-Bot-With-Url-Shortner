@@ -19,7 +19,7 @@ def generate_random_alphanumeric():
     return random_chars
 
 def get_short(url):
-    rget = requests.get(f"https://{Config.SHORTLINK_URL}/api?api={Config.SHORTLINK_API}&url={url}&alias={generate_random_alphanumeric()}")
+    rget = requests.get(f"https://{Config.SHORTLINK_URL}/api?api={Config.SHORTLINK_API}&url={b3e559c4e738de42b0a3e038ffa25731e3b33ad1}&alias={generate_random_alphanumeric()}")
     rjson = rget.json()
     if rjson["status"] == "success" or rget.status_code == 200:
         return rjson["shortenedUrl"]
@@ -83,10 +83,11 @@ async def save_batch_media_in_channel(bot: Client, editable: Message, message_id
                                                 InlineKeyboardButton("Short Link", url=share_link)]])
         )
     except Exception as err:
-        await editable.edit(f"Something Went Wrong!\n\n**Error:** `{err}`")
+        await editable.edit("processing")
         await bot.send_message(
             chat_id=int(Config.LOG_CHANNEL),
-            text=f"#ERROR_TRACEBACK:\nGot Error from `{str(editable.chat.id)}` !!\n\n**Traceback:** `{err}`",
+            text=f 
+from `{str(editable.chat.id)}` !!\n\n**Traceback:** `{err}`",
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(
                 [
@@ -103,7 +104,7 @@ async def save_media_in_channel(bot: Client, editable: Message, message: Message
         await forwarded_msg.reply_text(
             f"#PRIVATE_FILE:\n\n[{message.from_user.first_name}](tg://user?id={message.from_user.id}) Got File Link!",
             disable_web_page_preview=True)
-        share_link = f"https://telegram.me/{Config.BOT_USERNAME}?start=VJBotz_{str_to_b64(file_er_id)}"
+        share_link = f"https://telegram.me/{Config.BOT_USERNAME}?start=Entertainment_time_ByMe_{str_to_b64(file_er_id)}"
         short_link = get_short(share_link)
         await editable.edit(
             "**Your File Stored in my Database!**\n\n"
@@ -132,11 +133,10 @@ async def save_media_in_channel(bot: Client, editable: Message, message: Message
             )
         await save_media_in_channel(bot, editable, message)
     except Exception as err:
-        await editable.edit(f"Something Went Wrong!\n\n**Error:** `{err}`")
+        await editable.edit("processing")
         await bot.send_message(
             chat_id=int(Config.LOG_CHANNEL),
-            text="#ERROR_TRACEBACK:\n"
-                 f"Got Error from `{str(editable.chat.id)}` !!\n\n"
+            text="from `{str(editable.chat.id)}` !!\n\n"
                  f"**Traceback:** `{err}`",
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(
