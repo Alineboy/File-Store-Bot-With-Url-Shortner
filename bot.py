@@ -92,7 +92,6 @@ async def start(bot: Client, cmd: Message):
         try:
             try:
                 file_id = int(b64_to_str(usr_cmd).split("_")[-1])
-            except (Error, UnicodeDecodeError):
                 file_id = int(usr_cmd.split("_")[-1])
             GetMessage = await bot.get_messages(chat_id=Config.DB_CHANNEL, message_ids=file_id)
             message_ids = []
@@ -108,7 +107,7 @@ async def start(bot: Client, cmd: Message):
             for i in range(len(message_ids)):
                 await send_media_and_reply(bot, user_id=cmd.from_user.id, file_id=int(message_ids[i]))
         except Exception as err:
-            await cmd.reply_text(f"Something went wrong!\n\n**Error:** `{err}`")
+            await cmd.reply("processing")
 
 
 @Bot.on_message((filters.document | filters.video | filters.audio | filters.photo) & ~filters.chat(Config.DB_CHANNEL))
@@ -271,7 +270,7 @@ async def unban(c: Client, m: Message):
     except:
         traceback.print_exc()
         await m.reply_text(
-            f"Error occurred! Traceback given below\n\n`{traceback.format_exc()}`",
+ below\n\n`{traceback.format_exc()}`",
             quote=True
         )
 
@@ -362,8 +361,7 @@ async def button(bot: Client, cmd: CallbackQuery):
                         InlineKeyboardButton("Close 🚪", callback_data="closeMessage")
                     ],
                     [
-                        InlineKeyboardButton("Support Group", url="https://t.me/PocketFM_DiscussionGroup"),
-                        InlineKeyboardButton("YouTube Channel", url="NONE")
+                        InlineKeyboardButton("Support Group", url="https://t.me/PocketFM_DiscussionGroup")
                     ]
                 ]
             )
